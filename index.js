@@ -7,7 +7,7 @@ const mongoose1 = require('mongoose');
 const app = express();
 
 
-mongoose1.connect("mongodb+srv://jeffprakash:YEcVWZ2vpgNxmQOQ@cluster0.n6lkpby.mongodb.net/Cluster0");
+mongoose1.connect("");
 mongoose1.Promise = global.Promise;   // To avoid deprecation warning
 
 app.use(bodyParser.json());
