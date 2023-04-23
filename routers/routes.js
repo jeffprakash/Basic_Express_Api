@@ -73,5 +73,18 @@ router.get('/ninjas/find', (req, res, next) => {
     });
   });
   
+  router.get('/ninjas/paged', (req, res, next) => {
+    const beltcolor = req.query.rank;
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+    Ninja1.find({ rank: beltcolor }).skip(skip).limit(limit)
+      .then((ninjas) => {
+        res.send(ninjas);
+      }).catch((error) => {
+        next(error);
+      });
+  });
+
 
 module.exports = router;
