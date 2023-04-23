@@ -53,6 +53,7 @@ router.delete('/ninjas/:id', (req,res,next)=>{
 
 })
 
+//api with search
 
 router.get('/ninjas/find', (req, res, next) => {
     const beltcolor = req.query.beltcolor;
@@ -63,6 +64,7 @@ router.get('/ninjas/find', (req, res, next) => {
     });
   });
 
+  //api with sorting
 
   router.get('/ninjas/sort', (req, res, next) => {
     const beltcolor = req.query.beltcolor;
@@ -73,6 +75,8 @@ router.get('/ninjas/find', (req, res, next) => {
     });
   });
   
+  //api with pagination
+
   router.get('/ninjas/paged', (req, res, next) => {
     const beltcolor = req.query.rank;
     const page = parseInt(req.query.page) || 1;
