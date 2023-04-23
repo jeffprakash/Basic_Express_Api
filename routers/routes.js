@@ -68,7 +68,7 @@ router.get('/ninjas/find', (req, res, next) => {
 
   router.get('/ninjas/sort', (req, res, next) => {
     const beltcolor = req.query.beltcolor;
-    Ninja1.find({ rank: beltcolor }).sort('rank').then((ninjas) => {
+    Ninja1.find({ rank: beltcolor }).sort('name').then((ninjas) => {
       res.send(ninjas);
     }).catch((error) => {
       next(error);
