@@ -8,17 +8,18 @@ const Ninja1 = require('../models/ninja');
 
 router.get('/ninjas', (req,res,next)=>{
   
-    // Ninja1.find({}).then((ninja1)=>{
-    //     res.send(ninja1);
-    // });
-
-    Ninja1.geoNear(
-        {type:'Point', coordinates:[parseFloat(req.query.lng),parseFloat(req.query.lat)]},
-        {maxDistance:100000, spherical:true}
-    ).then((ninja1)=>{
+    Ninja1.find({}).then((ninja1)=>{
         res.send(ninja1);
     });
-    
+
+    // Ninja1.aggregate().near({
+    //     near: [parseFloat(req.query.lng), parseFloat(req.query.lat)],
+    //     maxDistance: 100000,
+    //     spherical: true,
+    //     distanceField: "dis"
+    // }).then((ninja1)=>{
+    //     res.send(ninja1);
+    // });
 
 })
 
@@ -51,5 +52,26 @@ router.delete('/ninjas/:id', (req,res,next)=>{
     
 
 })
+
+
+router.get('/ninjas/find', (req, res, next) => {
+    const beltcolor = req.query.beltcolor;
+    Ninja1.find({ rank: beltcolor }).then((ninjas) => {
+      res.send(ninjas);
+    }).catch((error) => {
+      next(error);
+    });
+  });
+
+
+  router.get('/ninjas/sort', (req, res, next) => {
+    const beltcolor = req.query.beltcolor;
+    Ninja1.find({ rank: beltcolor }).sort('rank').then((ninjas) => {
+      res.send(ninjas);
+    }).catch((error) => {
+      next(error);
+    });
+  });
+  
 
 module.exports = router;
